@@ -1,0 +1,161 @@
+package com.dac.studentApp.model;
+
+import java.sql.Blob;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
+
+
+@Component
+@Entity
+public class Teacher {
+
+	@Id
+	private String teacherId;
+	private String fName;
+	private String lName;
+	private String email;
+	private long mobile;
+	private String password;
+	@Lob
+	private Blob image;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "subCode")
+	private List<Subject> subject;
+	private String feedback;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "courseId")
+	private List<Course> course;
+	
+	
+	public Teacher() {
+		
+	}
+
+	
+	
+	public Teacher(String teacherId, String fName, String lName, String email, long mobile, String password, Blob image,
+			List<Subject> subject, String feedback, List<Course> course) {
+		super();
+		this.teacherId = teacherId;
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.mobile = mobile;
+		this.password = password;
+		this.image = image;
+		this.subject = subject;
+		this.feedback = feedback;
+		this.course = course;
+	}
+
+
+
+	public String getTeacherId() {
+		return teacherId;
+	}
+
+
+	public void setTeacherId(String teacherId) {
+		this.teacherId = teacherId;
+	}
+
+
+	public String getfName() {
+		return fName;
+	}
+
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+
+	public String getlName() {
+		return lName;
+	}
+
+
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public long getMobile() {
+		return mobile;
+	}
+
+
+	public void setMobile(long mobile) {
+		this.mobile = mobile;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public Blob getImage() {
+		return image;
+	}
+
+
+	public void setImage(Blob image) {
+		this.image = image;
+	}
+
+
+	public List<Subject> getSubject() {
+		return subject;
+	}
+
+
+	public void setSubject(List<Subject> subject) {
+		this.subject = subject;
+	}
+
+
+	public String getFeedback() {
+		return feedback;
+	}
+
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
+
+	public List<Course> getCourse() {
+		return course;
+	}
+
+
+	public void setCourse(List<Course> course) {
+		this.course = course;
+	}
+	
+	
+	
+	
+}
