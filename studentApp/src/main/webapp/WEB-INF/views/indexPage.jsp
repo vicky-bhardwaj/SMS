@@ -74,9 +74,6 @@
                 <a class="nav-link" href="#placement" style="color: #ffcc00;">Placement</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#gallery" style="color: #ffcc00;">Gallery</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="#contact" style="color: #ffcc00;">Contact Us</a>
             </li>
         </ul>
@@ -87,6 +84,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="loginDropdown">
                 <a class="dropdown-item" href="/studentLogin">Student</a>
                 <a class="dropdown-item" href="/teacherLogin">Teacher</a>
+                <a class="dropdown-item" href="/adminLogin">Admin</a>
             </div>
         </div>
     </div>

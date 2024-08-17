@@ -20,7 +20,7 @@
                     <div class="card-body">
                         <form action="registerTeacherAction" method="post">
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name">First Name</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name" required>
                             </div>
                             <div class="form-group">

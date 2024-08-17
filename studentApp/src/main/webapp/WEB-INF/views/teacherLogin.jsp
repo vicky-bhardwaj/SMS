@@ -30,7 +30,7 @@
                             <button type="submit" class="btn btn-success btn-block">Login</button>
                             <div class="text-center mt-3">
                                 <a href="/resetPassword" class="text-secondary">Forgot Password?</a><br>
-                                <a href="/teacherRegister" class="text-secondary">Register as a New Teacher</a>
+                                <!-- <a href="/teacherRegister" class="text-secondary">Register as a New Teacher</a> -->
                             </div>
                         </form>
                     </div>

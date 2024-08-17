@@ -14,6 +14,11 @@ public class LoginController {
     public String teacherLogin() {
         return "teacherLogin";
     }
+    @GetMapping("/adminLogin")
+    public String adminLogin() {
+        return "adminLogin";
+    }
+
 
 
 }
