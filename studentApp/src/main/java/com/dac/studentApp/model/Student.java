@@ -20,39 +20,32 @@ public class Student {
 	private int rollNo;
 	private String fName;
 	private String lName;
-	private String DOB;
-	private char gender;
-	private String email;
-	private long mobile;
-	
+	private String email;	
 	@ManyToOne  
 	@JoinColumn(name = "courseId") // Foreign key column in the Student table
 	private Course course;
 	private long PRN;
 	private String password;
-	@Lob
-	private Blob image;
-	
+
 	public Student() {
 		
 	}
 	
 	
 
-	public Student(int rollNo, String fName, String lName, String dOB, char gender, String email, long mobile,
-			Course course, long pRN, String password, Blob image) {
+	public Student(int rollNo, String fName, String lName, String email,
+			Course course, long pRN, String password) {
 		super();
 		this.rollNo = rollNo;
 		this.fName = fName;
 		this.lName = lName;
-		DOB = dOB;
-		this.gender = gender;
+
 		this.email = email;
-		this.mobile = mobile;
+		
 		this.course = course;
 		PRN = pRN;
 		this.password = password;
-		this.image = image;
+
 	}
 
 
@@ -81,21 +74,7 @@ public class Student {
 		this.lName = lName;
 	}
 
-	public String getDOB() {
-		return DOB;
-	}
 
-	public void setDOB(String dOB) {
-		DOB = dOB;
-	}
-
-	public char getGender() {
-		return gender;
-	}
-
-	public void setGender(char gender) {
-		this.gender = gender;
-	}
 
 	public String getEmail() {
 		return email;
@@ -105,13 +84,7 @@ public class Student {
 		this.email = email;
 	}
 
-	public long getMobile() {
-		return mobile;
-	}
 
-	public void setMobile(long mobile) {
-		this.mobile = mobile;
-	}
 
 	public Course getCourse() {
 		return course;
@@ -137,13 +110,7 @@ public class Student {
 		this.password = password;
 	}
 
-	public Blob getImage() {
-		return image;
-	}
 
-	public void setImage(Blob image) {
-		this.image = image;
-	}
 	
 	
 	

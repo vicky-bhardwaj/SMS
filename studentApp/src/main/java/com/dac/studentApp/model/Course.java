@@ -13,16 +13,16 @@ public class Course {
 	@Id
 	@Column(name="courseId")
 	private int courseId;
-	private String courseName;
+	public String name;
 	
 	public Course() {
 		
 	}
 	
-	public Course(int courseId, String courseName) {
+	public Course(int courseId, String Name) {
 		super();
 		this.courseId = courseId;
-		this.courseName = courseName;
+		this.name = Name;
 	}
 	
 	public int getCourseId() {
@@ -32,10 +32,10 @@ public class Course {
 		this.courseId = courseId;
 	}
 	public String getCourseName() {
-		return courseName;
+		return name;
 	}
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
+	public void setCourseName(String Name) {
+		this.name = Name;
 	}
 	
 	

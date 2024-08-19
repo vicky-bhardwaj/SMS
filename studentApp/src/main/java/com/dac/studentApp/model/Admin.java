@@ -1,7 +1,7 @@
 package com.dac.studentApp.model;
 
 
-import javax.validation.constraints.NotNull;
+
 
 import org.springframework.stereotype.Component;
 
@@ -9,10 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class Admin {
 	
-	@NotNull(message="{error.adminId.blank}")
+
 	private String adminId;
-	@NotNull(message="{error.password.blank}")
+	
 	private String password;
+	
+	private String adminName;
+	public String getAdminName() {
+		return adminName;
+	}
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
 	public String getAdminId() {
 		return adminId;
 	}

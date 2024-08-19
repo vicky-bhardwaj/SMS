@@ -22,10 +22,7 @@ public class Teacher {
 	private String fName;
 	private String lName;
 	private String email;
-	private long mobile;
 	private String password;
-	@Lob
-	private Blob image;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "subCode")
 	private List<Subject> subject;
 	private String feedback;
@@ -39,16 +36,16 @@ public class Teacher {
 
 	
 	
-	public Teacher(String teacherId, String fName, String lName, String email, long mobile, String password, Blob image,
+	public Teacher(String teacherId, String fName, String lName, String email, String password,
 			List<Subject> subject, String feedback, List<Course> course) {
 		super();
 		this.teacherId = teacherId;
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
-		this.mobile = mobile;
+		
 		this.password = password;
-		this.image = image;
+		
 		this.subject = subject;
 		this.feedback = feedback;
 		this.course = course;
@@ -96,14 +93,7 @@ public class Teacher {
 	}
 
 
-	public long getMobile() {
-		return mobile;
-	}
 
-
-	public void setMobile(long mobile) {
-		this.mobile = mobile;
-	}
 
 
 	public String getPassword() {
@@ -113,16 +103,6 @@ public class Teacher {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-
-	public Blob getImage() {
-		return image;
-	}
-
-
-	public void setImage(Blob image) {
-		this.image = image;
 	}
 
 

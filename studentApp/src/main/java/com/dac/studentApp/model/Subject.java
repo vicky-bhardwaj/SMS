@@ -30,22 +30,18 @@ public class Subject {
 	private List<Notes> notes;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "subject")
 	private List<Assignments> assignments;
-	@Lob
-	private Blob image;
 	
 	public Subject() {
 		
 	}
 	
-	public Subject(Course course, int subCode, String subName, List<Notes> notes, List<Assignments> assignments,
-			Blob image) {
+	public Subject(Course course, int subCode, String subName, List<Notes> notes, List<Assignments> assignments) {
 		super();
 		this.course = course;
 		this.subCode = subCode;
 		this.subName = subName;
 		this.notes = notes;
 		this.assignments = assignments;
-		this.image = image;
 	}
 	public Course getCourse() {
 		return course;
@@ -77,12 +73,7 @@ public class Subject {
 	public void setAssignments(List<Assignments> assignments) {
 		this.assignments = assignments;
 	}
-	public Blob getImage() {
-		return image;
-	}
-	public void setImage(Blob image) {
-		this.image = image;
-	}
+
 	
 	
 	

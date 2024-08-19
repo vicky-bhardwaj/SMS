@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/index")
 public class HomeController {
 
-	@GetMapping(value = "")
+	@GetMapping(value = "/index")
     public String index() {
+        return "indexPage";
+    }
+	@GetMapping(value = "/logout")
+    public String logout() {
         return "indexPage";
     }
 
