@@ -23,8 +23,8 @@ public class TeacherService {
 	}
 
 	
-	public Optional<Teacher> getOne(String teacherId) {
-		return teacherRepository.findById(teacherId);
+	public Teacher getOne(String teacherId) {
+		return teacherRepository.findById(teacherId).orElse(null);
 	}
 
 	public void addNew(Teacher teacher) {

@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom">
+<nav class="navbar navbar-expand-lg navbar-custom" th:fragment="admin_navbar">
     <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,11 +30,17 @@
             <li class="nav-item">
                 <a class="nav-link">Welcome, Admin!</a>
             </li>
+            <li class="nav-item">
+               
+            </li>
+            <li class="nav-item ml-10">
+                <a  class="nav-link">Home</a>
+            </li>
         </ul>
-        <div class="btn-warning">
-        <a class="nav-link" th:href="@{/logout}"><button class="btn btn-warning" style="background-color: #ff5733; color: white;" type="button" id="loginDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="btn btn-warning ms-auto">
+        <a class="nav-link" th:href="@{/logout}" type="button" id="loginDropdown"  >
                     LogOut
-                </button></a>
+                </a>
         </div>
     </div>
 </nav>
@@ -67,75 +73,13 @@
         </div>
        </div>
  </div>
+ 
+ <footer class="border-top bg-light text-muted text-center" th:fragment="admin_footer">
+ <div class="container pb-5">
+ &copy; 2024 --ACTS STUDENT PORTAL--
+ </div>
+ </footer>
 
-        <!-- View List of Students -->
-        <!-- <div class="col-md-4">
-            <div class="card dashboard-card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">View Students</h5>
-                    <p class="card-text">View the list of all students.</p>
-                    <a th:href="@{/students/list}" class="btn btn-primary">Go</a>
-                </div>
-            </div>
-        </div>
-
-        View List of Teachers
-        <div class="col-md-4">
-            <div class="card dashboard-card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">View Teachers</h5>
-                    <p class="card-text">View the list of all teachers.</p>
-                    <a th:href="@{/teachers/list}" class="btn btn-primary">Go</a>
-                </div>
-            </div>
-        </div>
-
-        Delete Student
-        <div class="col-md-4">
-            <div class="card dashboard-card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Delete Student</h5>
-                    <p class="card-text">Remove a student from the system.</p>
-                    <a th:href="@{/students/delete}" class="btn btn-danger">Go</a>
-                </div>
-            </div>
-        </div>
-
-        Delete Teacher
-        <div class="col-md-4">
-            <div class="card dashboard-card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Delete Teacher</h5>
-                    <p class="card-text">Remove a teacher from the system.</p>
-                    <a th:href="@{/teachers/delete}" class="btn btn-danger">Go</a>
-                </div>
-            </div>
-        </div>
-
-        Update Student Details
-        <div class="col-md-4">
-            <div class="card dashboard-card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Update Student Details</h5>
-                    <p class="card-text">Edit the details of an existing student.</p>
-                    <a th:href="@{/students/update}" class="btn btn-warning">Go</a>
-                </div>
-            </div>
-        </div>
-
-        Update Teacher Details
-        <div class="col-md-4">
-            <div class="card dashboard-card">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Update Teacher Details</h5>
-                    <p class="card-text">Edit the details of an existing teacher.</p>
-                    <a th:href="@{/teachers/update}" class="btn btn-warning">Go</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div> -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

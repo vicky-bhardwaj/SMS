@@ -23,8 +23,8 @@ public class StudentService {
 		}
 
 		
-		public Optional<Student> getOne(int rollNo) {
-			return studentRepository.findById(rollNo);
+		public Student getOne(int rollNo) {
+			return studentRepository.findById(rollNo).orElse(null);
 		}
 
 		public void addNew(Student student) {
