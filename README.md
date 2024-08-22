@@ -6,7 +6,7 @@
 
 **Technology Stack:**
 
-_Frontend:_ Developed using the React framework, ensuring a responsive and interactive user interface.
+_Frontend:_ Developed using the Thymeleaf, ensuring a responsive and interactive user interface.
 
 _Backend:_ Powered by Spring Boot, which provides a robust and scalable backend infrastructure.
 
