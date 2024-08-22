@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>ACTS SMS</title>
+    <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -44,6 +45,10 @@
                 <div class="login-header">
                     Admin Login
                 </div>
+                  <!-- Error Message -->
+                <div th:if="${errorMessage}" class="alert alert-danger text-center">
+                    <span th:text="${errorMessage}"></span>
+                </div>
                 <form th:action="@{/ad}" th:object="${admindata}" method="post">
                     <div class="form-group">
                         <label for="adminId">Admin ID</label>
@@ -55,7 +60,15 @@
                         <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter Password" required>
                        <!--  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></span> -->
                     </div>
-                    <button type="submit" class="btn btn-custom btn-block">Login</button>
+                  <div class="row">
+    			<div class=" col-sm-4 d-grid">
+    				<button type="submit" class="btn btn-primary">Login</button>
+    			</div>
+    			<div class="col-sm-4 d-grid">
+    				<a class="btn btn-outline-primary" th:href="@{/}">Cancel</a>
+    			</div>
+    		
+    		</div>
                 </form>
             </div>
         </div>

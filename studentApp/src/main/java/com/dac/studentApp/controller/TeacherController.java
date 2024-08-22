@@ -1,62 +1,129 @@
 package com.dac.studentApp.controller;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.dac.studentApp.exceptionhandler.SessionExpiredException;
+import com.dac.studentApp.model.Feedback;
+import com.dac.studentApp.model.Student;
 import com.dac.studentApp.model.Teacher;
+import com.dac.studentApp.service.AttendanceService;
+import com.dac.studentApp.service.FeedbackService;
+import com.dac.studentApp.service.StudentService;
 import com.dac.studentApp.service.TeacherService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
-@RequestMapping("/updateTeachers")
+@SessionAttributes("teacher")
 public class TeacherController {
 
-    @Autowired
-    private TeacherService teacherService;
+	
+	@Autowired
+	private TeacherService teacherService;
+	@Autowired
+	private StudentService studentService;
+	@Autowired
+	private FeedbackService feedbackService;
+	
+	    @PostMapping("/td")
+	    public String tDashboard( @ModelAttribute("teacherdata") Teacher teacher, Model model) {
+	    	
+	    	boolean check=teacherService.validateLogin(teacher);
+	    	if(check==true) {
+	    		Teacher teach=teacherService.getOne(teacher.getTeacherId());
+	    		model.addAttribute("teacher",teach);
+	    		return "teacherDashboard";
+		        } else {
+		        	 model.addAttribute("errorMessage", "Invalid Teacher ID or Password. Please try again.");
+		        	 return "teacherLogin";
+		        }
+	    }
+	    
+	    @GetMapping("/td")
+	    public String getDashboard(@ModelAttribute("teacher") Teacher teacher, Model model,HttpSession session )
+	    {
+	    	if (session.getAttribute("teacher") == null) {
+	            throw new SessionExpiredException(); // Throw the custom exception if the session is expired
+	        }
+	    	model.addAttribute("teacher",teacher);
+	    	return "teacherDashboard";
+	    }
+	
+			@GetMapping("teacher/attendance")
+			public String attendance(@ModelAttribute("teacher") Teacher teacher, Model model ) {
+				 List<Student> students = studentService.getAll();
+			    model.addAttribute("students", students);
+				model.addAttribute("teacher",teacher);
+				return "teacherOptions/attendance";
+			}
+			@GetMapping("teacher/profile")
+			public String viewTeacher(@ModelAttribute("teacher") Teacher teacher, Model model ) {
+				model.addAttribute("teacher",teacher);
+				return "teacherOptions/viewTeacher";
+			}
+			@GetMapping("teacher/notes")
+			public String notesTeacher(@ModelAttribute("teacher") Teacher teacher, Model model ) {
+				model.addAttribute("teacher",teacher);
+				return "teacherOptions/notesTeacher";
+			}
+			@GetMapping("teacher/assignments")
+			public String assignmentTeacher(@ModelAttribute("teacher") Teacher teacher, Model model ) {
+				model.addAttribute("teacher",teacher);
+				return "teacherOptions/assignmentTeacher";
+			}
+			@GetMapping("teacher/feedback")
+			public String feedbackTracker(@ModelAttribute("teacher") Teacher teacher, Model model ) {
+				List<Feedback>feedbackList=feedbackService.getTeacher(teacher.getTeacherId());
+				double avgRating=feedbackService.getAvgRating(teacher.getTeacherId());
+				model.addAttribute("feedbackList", feedbackList);
+				model.addAttribute("averageRating",avgRating);
+				model.addAttribute("teacher",teacher);
+				return "teacherOptions/feedbackTracker";
+			}
+			
+			
+			 @Autowired
+			    private AttendanceService attendanceService;
 
-    // Method to get all teachers
-    @GetMapping
-    public String getAll(Model model) {
-        List<Teacher> teachers = teacherService.getAll();
-        model.addAttribute("teachers", teachers);
-        return "adminOptions/updateTeachers";  // Ensure this corresponds to the Thymeleaf template name
-    }
+			    @PostMapping("/teacher/submitAttendance")
+			    public String submitAttendance(@RequestParam("attendanceDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate attendanceDate,
+			            @RequestParam Map<String, String> requestParams, Model model) {
+			    	System.out.println("1st");
+//			        String dateString = requestParams.get("attendanceDate");
+//			        LocalDate date = LocalDate.parse(dateString);
+			        LocalDate date =attendanceDate;
+			        System.out.println("2nd");
 
-    // Method to get a single teacher by teacherId for editing
-    @GetMapping("/getOne/{teacherId}")
-    @ResponseBody
-    public Optional<Teacher> getOne(@PathVariable String teacherId) {
-        return teacherService.getOne(teacherId);
-    }
+			        Map<Integer, Boolean> attendanceMap = new HashMap<>();
+			        for (Map.Entry<String, String> entry : requestParams.entrySet()) {
+			        		System.out.println("3rd");
+			            if (entry.getKey().startsWith("attendance[")) {
+			                int rollNo = Integer.parseInt(entry.getKey().substring(11, entry.getKey().length() - 1));
+			                boolean present = entry.getValue().equals("present");
+			                attendanceMap.put(rollNo, present);
+			            }
+			        }
+			        System.out.println("4th");
+			        attendanceService.saveAttendance(attendanceMap, date);
 
-    // Method to add a new teacher
-    @PostMapping("/addNew")
-    public String addNew(Teacher teacher) {
-        teacherService.addNew(teacher);
-        return "redirect:/adminOptions/updateTeachers";
-    }
+			        // Add success message to the model
+			        model.addAttribute("message", "Attendance has been successfully recorded.");
 
-    // Method to update teacher details
-    @RequestMapping(value = "/update", method = {RequestMethod.PUT, RequestMethod.POST})
-    public String update(Teacher teacher) {
-        teacherService.update(teacher);
-        return "redirect:/adminOptions/updateTeachers";
-    }
+			        // Redirect to a confirmation or dashboard page
+			        return "redirect:/td";
+			    }
 
-    // Method to delete a teacher by teacherId
-    @RequestMapping(value = "/delete/{teacherId}", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(@PathVariable String teacherId) {
-        teacherService.delete(teacherId);
-        return "redirect:/adminOptions/updateTeachers";
-    }
 }
-

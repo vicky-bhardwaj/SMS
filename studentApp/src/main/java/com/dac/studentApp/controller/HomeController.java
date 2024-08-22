@@ -2,24 +2,26 @@ package com.dac.studentApp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
 public class HomeController {
 
-	@GetMapping(value = "/index")
+	@GetMapping(value = "/")
     public String index() {
         return "indexPage";
     }
 	@GetMapping(value = "/logout")
-    public String logout() {
+    public String logout(HttpSession session) {
+		 session.invalidate();
         return "indexPage";
     }
 
-    @GetMapping("/about")
+    @GetMapping("/error")
     public String about() {
-        return "about";
+        return "errorPage";
     }
 
   

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ACTS SMS</title>
+    <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav th:replace="~{studentDashboard :: student_navbar}">
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Profile Details</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${student.fName}" >Student Name</h5>
+                <h5 class="card-title" th:text="${student.lName}" >Student Name</h5>
+                <p class="card-text"><strong>PRN:</strong> <span th:text="${student.PRN}">123456</span></p>
+                <p class="card-text"><strong>Email:</strong> <span th:text="${student.email}">email@example.com</span></p>
+               <!--  <p class="card-text"><strong>Course:</strong> <span th:text="${student.course}">Course Name</span></p> -->
+                <!-- Additional fields can be added here -->
+            </div>
+        </div>
+    </div>
+
+<footer th:replace="~{studentDashboard :: student_footer}"></footer>
+</body>
+</html>

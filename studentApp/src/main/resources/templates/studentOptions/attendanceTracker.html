@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ACTS SMS</title>
+    <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+   <nav th:replace="~{studentDashboard :: student_navbar}">
+    </nav>
+
+    <div class="container mt-4">
+        <h2 class="text-center">Attendance Tracker</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Total Sessions: <span th:text="${studentAttendance.totalSessions}"></span></h4>
+                <h4>Sessions Present: <span th:text="${studentAttendance.present}"></span></h4>
+                <h4>Attendance Percentage: <span th:text="${studentAttendance.percentage}"></span></h4>
+            </div>
+            <div class="col-md-6">
+                <canvas id="attendancePieChart" style="width:100%;max-width:600px"></canvas>
+            </div>
+        </div>
+        
+        <div class="table-responsive mt-4">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Dates Present</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Only show dates where the student was present -->
+                    <tr th:each="attendance : ${attendanceList}">
+                        <td th:text="${attendance.date}">Sample Date</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<footer th:replace="~{studentDashboard :: student_footer}"></footer>
+
+    <script>
+        // Data for the pie chart
+        var totalSessions = /*[[${studentAttendance.totalSessions}]]*/ 3;
+        var presentSessions = /*[[${studentAttendance.present}]]*/ 2;
+
+        var ctx = document.getElementById('attendancePieChart').getContext('2d');
+        var attendancePieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Present', 'Absent'],
+                datasets: [{
+                    data: [presentSessions, totalSessions - presentSessions],
+                    backgroundColor: ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)'],
+                    borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                var label = tooltipItem.label || '';
+                                var value = tooltipItem.raw || 0;
+                                return label + ': ' + value + ' (' + ((value / totalSessions) * 100).toFixed(2) + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -25,7 +25,6 @@ public class Teacher {
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "subCode")
 	private List<Subject> subject;
-	private String feedback;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "courseId")
 	private List<Course> course;
 	
@@ -37,7 +36,7 @@ public class Teacher {
 	
 	
 	public Teacher(String teacherId, String fName, String lName, String email, String password,
-			List<Subject> subject, String feedback, List<Course> course) {
+			List<Subject> subject, List<Course> course) {
 		super();
 		this.teacherId = teacherId;
 		this.fName = fName;
@@ -47,7 +46,6 @@ public class Teacher {
 		this.password = password;
 		
 		this.subject = subject;
-		this.feedback = feedback;
 		this.course = course;
 	}
 
@@ -116,14 +114,6 @@ public class Teacher {
 	}
 
 
-	public String getFeedback() {
-		return feedback;
-	}
-
-
-	public void setFeedback(String feedback) {
-		this.feedback = feedback;
-	}
 
 
 	public List<Course> getCourse() {

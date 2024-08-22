@@ -24,6 +24,7 @@ public class Student {
 	@ManyToOne  
 	@JoinColumn(name = "courseId") // Foreign key column in the Student table
 	private Course course;
+	
 	private long PRN;
 	private String password;
 
@@ -34,7 +35,7 @@ public class Student {
 	
 
 	public Student(int rollNo, String fName, String lName, String email,
-			Course course, long pRN, String password) {
+			Course course, long pRN) {
 		super();
 		this.rollNo = rollNo;
 		this.fName = fName;
@@ -44,7 +45,7 @@ public class Student {
 		
 		this.course = course;
 		PRN = pRN;
-		this.password = password;
+		this.password = lName;
 
 	}
 

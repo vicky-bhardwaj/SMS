@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ACTS SMS</title>
+    <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+     <nav th:replace="~{teacherDashboard :: teacher_navbar}"></nav>
+
+    <div class="container mt-4">
+        <h2>Upload Notes</h2>
+        <div class="row">
+            <!-- Subject cards for notes -->
+            <div class="col-md-4" th:each="subject : ${subjects}">
+                <div class="card mb-4">
+                    <img th:src="@{${subject.image}}" class="card-img-top" alt="Subject Image">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${subject.name}">Subject Name</h5>
+                        <form>
+                            <div class="form-group">
+                                <label for="notesFile">Choose File:</label>
+                                <input type="file" class="form-control" id="notesFile">
+                            </div>
+                            <button class="btn btn-primary">Upload</button>
+                        </form>
+                        <h6>Already Uploaded:</h6>
+                        <ul class="list-group">
+                            <li class="list-group-item" th:each="note : ${subject.notes}">
+                                <a th:href="@{${note.url}}" target="_blank" th:text="${note.name}">Note Name</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer th:replace="~{teacherDashboard :: teacher_footer}"></footer>
+</body>
+</html>

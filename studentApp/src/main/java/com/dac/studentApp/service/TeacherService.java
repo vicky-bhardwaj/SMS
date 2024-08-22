@@ -38,4 +38,9 @@ public class TeacherService {
 	public void delete(String teacherId) {
 		teacherRepository.deleteById(teacherId);
 	}
+	
+	public boolean validateLogin(Teacher teacher) {
+		
+		return teacherRepository.validateLogin(teacher.getTeacherId(),teacher.getPassword());
+	}
 }

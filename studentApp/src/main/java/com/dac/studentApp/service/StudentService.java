@@ -38,6 +38,16 @@ public class StudentService {
 		public void delete(int rollNo) {
 			studentRepository.deleteById(rollNo);
 		}
+		
+		public boolean validateLogin(Student student) {
+					
+			return studentRepository.validateLogin(student.getPRN(),student.getPassword());
+		}
+		
+		public Student getByPRN(Student student) {
+			
+			return studentRepository.getByPRN(student.getPRN());
+		}
 //
 //public List<Product> getProducts() {
 //	
@@ -63,4 +73,7 @@ public class StudentService {
 //	return prod;
 //
 //}
+
+
+		
 }
