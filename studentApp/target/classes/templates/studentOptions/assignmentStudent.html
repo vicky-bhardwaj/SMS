@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ACTS SMS</title>
+    <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .scrollable-section {
+            height: 200px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <nav th:replace="~{studentDashboard :: student_navbar}">
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Your Assignments</h2>
+        <div class="row">
+            <div class="col-md-4 scrollable-section">
+                <div class="card mb-3" th:each="subject : ${subjectList}">
+                    <img class="card-img-top" th:src="${subject.image}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${subject.name}">Subject Name</h5>
+                        <a href="#" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <h4>Upload Assignment</h4>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+                <button class="btn btn-primary mt-3">Upload</button>
+            </div>
+        </div>
+    </div>
+
+<footer th:replace="~{studentDashboard :: student_footer}"></footer>
+</body>
+</html>

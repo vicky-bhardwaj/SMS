@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ACTS SMS</title>
+    <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav th:replace="~{teacherDashboard :: teacher_navbar}"></nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="nav flex-column nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="upload-assignment-tab" data-toggle="pill" href="#upload-assignment-content">Upload Assignment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="view-uploads-tab" data-toggle="pill" href="#view-uploads-content">View Student Uploads</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="upload-assignment-content">
+                        <h3>Upload Assignment</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="assignmentFile">Choose File:</label>
+                                <input type="file" class="form-control" id="assignmentFile">
+                            </div>
+                            <button class="btn btn-primary">Upload</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="view-uploads-content">
+                        <h3>Student Uploads</h3>
+                        <!-- Display student uploads -->
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Assignment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data fetched from DB -->
+                                <tr th:each="upload : ${uploadList}">
+                                    <td th:text="${upload.studentName}">Sample Student</td>
+                                    <td>
+                                        <a th:href="@{${upload.fileUrl}}" target="_blank">View Assignment</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer th:replace="~{teacherDashboard :: teacher_footer}"></footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ACTS SMS</title>
+    <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .stars-outer {
+            display: inline-block;
+            position: relative;
+            font-family: FontAwesome;
+        }
+        .stars-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            color: #f8ce0b;
+        }
+        .stars-outer::before {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            color: #ddd;
+        }
+        .stars-inner::before {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            color: #f8ce0b;
+        }
+    </style>
+</head>
+<body>
+    <nav th:replace="~{teacherDashboard :: teacher_navbar}"></nav>
+
+    <div class="container mt-4">
+        <h2>Feedback Tracker</h2>
+
+        <!-- Average Rating -->
+        <div class="text-center mb-4">
+            <h3>Average Rating: 
+                <span class="stars-outer">
+                    <span class="stars-inner" th:style="'width:' + ${averageRating/5.0*100} + '%'"></span>
+                </span>
+                <span th:text="'(' + ${averageRating} + '/5)'"></span>
+            </h3>
+        </div>
+
+        <!-- Feedback Comments -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>SNo.</th>
+                        <th>Feedback</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="feedback, iterStat : ${feedbackList}">
+                        <td th:text="${iterStat.count}">1</td>
+                        <td>
+                            <blockquote class="blockquote">
+                                <p th:text="${feedback.comments}">Sample Feedback</p>
+                                <footer class="blockquote-footer">
+                                    <span th:text="'Rating: ' + ${feedback.rating}"></span>
+                                </footer>
+                            </blockquote>
+                        </td>
+                        <td>
+                            <div class="stars-outer">
+                                <div class="stars-inner" th:style="'width:' + ${feedback.rating/5.0*100} + '%'"></div>
+                            </div>
+                            <span th:text="'(' + ${feedback.rating} + '/5)'"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer th:replace="~{teacherDashboard :: teacher_footer}"></footer>
+
+    <!-- Include FontAwesome for stars -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

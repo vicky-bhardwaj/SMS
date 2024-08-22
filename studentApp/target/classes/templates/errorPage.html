@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTS SMS</title>
+    <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        .error-container {
+            max-width: 500px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .error-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .error-container p {
+            margin-bottom: 20px;
+            color: #6c757d;
+        }
+        .error-container a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .error-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>Unexpected Error Occurred</h1>
+        <p>Sorry, something went wrong.</p>
+        <p>Please <a href="/">visit this link</a> and restart again.</p>
+    </div>
+</body>
+</html>
