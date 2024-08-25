@@ -1,16 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>ACTS SMS</title>
+    <title>ACTS SMS - Feedback</title>
     <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 15px 0;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
 </head>
 <body>
-    <nav th:replace="~{studentDashboard :: student_navbar}">
-    </nav>
+    <nav th:replace="~{studentDashboard :: student_navbar}"></nav>
 
-    <div class="container mt-4">
+    <div class="container">
         <h2>Feedback for Tutor</h2>
         <form id="feedbackForm" method="post" th:action="@{/student/submitFeedback}" th:object="${feedback}">
             
@@ -56,7 +87,11 @@
         </form>
     </div>
 
-    <footer th:replace="~{studentDashboard :: student_footer}"></footer>
+    <footer th:replace="~{studentDashboard :: student_footer}">
+        <div class="container">
+            &copy; 2024 -- ACTS STUDENT PORTAL --
+        </div>
+    </footer>
 
     <script>
         $(document).ready(function() {

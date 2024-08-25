@@ -1,66 +1,121 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.org">
 <head>
-    <title>ACTS SMS</title>
-    <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-image: url('https://source.unsplash.com/1600x900/?education,student');
-            background-size: cover;
-        }
-        .login-container {
-            margin-top: 100px;
-        }
-        .login-box {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-        }
-        /* Remove increment/decrement arrows in number input */
-        input[type=number]::-webkit-outer-spin-button,
-        input[type=number]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
-    </style>
+<title>ACTS SMS</title>
+<link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+body {
+	background-image: 
+		url("/resources/carousel/student_login.jpg");
+		
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-container {
+	max-width: 500px;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.9);
+	padding: 30px;
+	border-radius: 15px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.login-box h2 {
+	color: #333;
+	margin-bottom: 20px;
+	font-weight: 700;
+	text-align: center;
+	font-size: 28px;
+}
+
+.login-box .form-label {
+	font-weight: 600;
+	color: #555;
+}
+
+.login-box .form-control {
+	border-radius: 5px;
+	box-shadow: none;
+	border: 1px solid #ddd;
+}
+
+.login-box .btn-primary {
+	background-color: #007bff;
+	border: none;
+	font-weight: 600;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 5px 10px rgba(0, 123, 255, 0.2);
+}
+
+.login-box .btn-primary:hover {
+	background-color: #0056b3;
+}
+
+.login-box .btn-outline-primary {
+	border-color: #007bff;
+	color: #007bff;
+	font-weight: 600;
+}
+
+.login-box .btn-outline-primary:hover {
+	background-color: #007bff;
+	color: #fff;
+}
+
+.login-box .alert-danger {
+	border-radius: 5px;
+}
+
+.login-box .text-secondary {
+	font-size: 14px;
+}
+
+.text-secondary:hover {
+	color: #0056b3;
+}
+</style>
 </head>
 <body>
-    <div class="container login-container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 login-box">
-                <h2 class="text-center">Student Login</h2>
-                 <!-- Error Message -->
-                <div th:if="${errorMessage}" class="alert alert-danger text-center">
-                    <span th:text="${errorMessage}"></span>
-                </div>
-                <form th:action="@{/sd}" th:object="${studentdata}" method="post">
-                    <div class="form-group mb-3">
-                        <label for="prn" class="form-label">PRN Number</label>
-                        <input type="number" class="form-control" id="PRN" th:name="PRN"  placeholder="Enter your PRN" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter your password" required>
-                    </div>
-                    <div class="row">
-    			<div class=" col-sm-4 d-grid">
-    				<button type="submit" class="btn btn-primary">Login</button>
-    			</div>
-    			<div class="col-sm-4 d-grid">
-    				<a class="btn btn-outline-primary" href="/">Cancel</a>
-    			</div>
-    		
-    		</div>
-                    <div class="text-center mt-3">
-                                <a href="/resetPassword" class="text-secondary">Forgot Password?</a>
-                            </div>
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="container login-container">
+		<div class="login-box">
+			<h2>Student Login</h2>
+			<!-- Error Message -->
+			<div th:if="${errorMessage}" class="alert alert-danger text-center">
+				<span th:text="${errorMessage}"></span>
+			</div>
+			<form th:action="@{/sd}" th:object="${studentdata}" method="post">
+				<div class="form-group mb-3">
+					<label for="prn" class="form-label">PRN Number</label> <input
+						type="number" class="form-control" id="PRN" th:name="PRN"
+						placeholder="Enter your PRN" required>
+				</div>
+				<div class="form-group mb-3">
+					<label for="password" class="form-label">Password</label> <input
+						type="password" class="form-control" id="password"
+						th:field="*{password}" placeholder="Enter your password" required>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 d-grid">
+						<button type="submit" class="btn btn-primary">Login</button>
+					</div>
+					<div class="col-sm-6 d-grid">
+						<a class="btn btn-outline-primary" href="/">Cancel</a>
+					</div>
+				</div>
+				<div class="text-center mt-3">
+					<a href="/resetPassword" class="text-secondary">Forgot
+						Password?</a>
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

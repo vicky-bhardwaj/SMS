@@ -5,21 +5,47 @@
     <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+        .table {
+            margin-top: 30px;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-   <nav th:replace="~{studentDashboard :: student_navbar}">
-    </nav>
+   <nav th:replace="~{studentDashboard :: student_navbar}"></nav>
 
-    <div class="container mt-4">
+    <div class="container">
         <h2 class="text-center">Attendance Tracker</h2>
         <div class="row">
             <div class="col-md-6">
-                <h4>Total Sessions: <span th:text="${studentAttendance.totalSessions}"></span></h4>
-                <h4>Sessions Present: <span th:text="${studentAttendance.present}"></span></h4>
-                <h4>Attendance Percentage: <span th:text="${studentAttendance.percentage}"></span></h4>
+                <div class="card p-4">
+                    <h4>Total Sessions: <span th:text="${studentAttendance.totalSessions}"></span></h4>
+                    <h4>Sessions Present: <span th:text="${studentAttendance.present}"></span></h4>
+                    <h4>Attendance Percentage: <span th:text="${studentAttendance.percentage}"></span>%</h4>
+                </div>
             </div>
-            <div class="col-md-6">
-                <canvas id="attendancePieChart" style="width:100%;max-width:600px"></canvas>
+            <div class="col-md-6 chart-container">
+                <canvas id="attendancePieChart" style="width:100%; max-width:400px"></canvas>
             </div>
         </div>
         
@@ -40,7 +66,7 @@
         </div>
     </div>
 
-<footer th:replace="~{studentDashboard :: student_footer}"></footer>
+    <footer th:replace="~{studentDashboard :: student_footer}"></footer>
 
     <script>
         // Data for the pie chart

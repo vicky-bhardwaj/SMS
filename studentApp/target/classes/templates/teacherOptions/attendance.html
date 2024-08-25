@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>ACTS SMS</title>
     <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
     <!-- Bootstrap CSS -->
@@ -8,6 +9,36 @@
     <!-- Bootstrap Datepicker CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h2 {
+            margin-bottom: 1.5rem;
+        }
+        .table thead th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .datepicker-dropdown {
+            z-index: 9999 !important; /* Ensure the datepicker is above other elements */
+        }
         .frozen {
             pointer-events: none;
             opacity: 0.6;
@@ -20,19 +51,18 @@
 
     <!-- Container for the Attendance Marker -->
     <div class="container mt-4">
-        <h2>Attendance Marker</h2>
-
-       
+        <h2 class="text-center">Attendance Marker</h2>
+        
         <!-- Attendance Table -->
         <form id="attendanceForm" method="post" th:action="@{/teacher/submitAttendance}">
-             <!-- Date Picker -->
-        <div class="form-group">
-            <label for="attendanceDate">Select Date:</label>
-            <input type="text" id="attendanceDate" th:name="attendanceDate" class="form-control" placeholder="Choose a date" required>
-        </div>
+            <!-- Date Picker -->
+            <div class="form-group">
+                <label for="attendanceDate">Select Date:</label>
+                <input type="text" id="attendanceDate" th:name="attendanceDate" class="form-control" placeholder="Choose a date" required>
+            </div>
             
-            <table class="table table-bordered" id="attendanceTable">
-                <thead class="thead-dark">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
                         <th>Roll No</th>
                         <th>PRN</th>
@@ -54,7 +84,9 @@
             </table>
             
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Submit Attendance</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit Attendance</button>
+            </div>
         </form>
     </div>
 
@@ -72,8 +104,6 @@
             autoclose: true,
             todayHighlight: true
         });
-
-       
     </script>
 </body>
 </html>

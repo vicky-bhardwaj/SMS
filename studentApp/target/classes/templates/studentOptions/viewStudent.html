@@ -4,25 +4,63 @@
     <title>ACTS SMS</title>
     <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .card-title {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+        .card-text {
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 15px 0;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
 </head>
 <body>
-    <nav th:replace="~{studentDashboard :: student_navbar}">
-    </nav>
+    <nav th:replace="~{studentDashboard :: student_navbar}"></nav>
 
-    <div class="container mt-4">
+    <div class="container">
         <h2>Profile Details</h2>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title" th:text="${student.fName}" >Student Name</h5>
-                <h5 class="card-title" th:text="${student.lName}" >Student Name</h5>
+                <h5 class="card-title" th:text="${student.fName} + ' ' + ${student.lName}">Student Name</h5>
                 <p class="card-text"><strong>PRN:</strong> <span th:text="${student.PRN}">123456</span></p>
                 <p class="card-text"><strong>Email:</strong> <span th:text="${student.email}">email@example.com</span></p>
-               <!--  <p class="card-text"><strong>Course:</strong> <span th:text="${student.course}">Course Name</span></p> -->
                 <!-- Additional fields can be added here -->
             </div>
         </div>
     </div>
 
-<footer th:replace="~{studentDashboard :: student_footer}"></footer>
+    <footer th:replace="~{studentDashboard :: student_footer}">
+        <div class="container">
+            &copy; 2024 -- ACTS STUDENT PORTAL --
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

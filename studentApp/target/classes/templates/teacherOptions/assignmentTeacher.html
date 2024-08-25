@@ -1,14 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>ACTS SMS</title>
     <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+        .nav-pills .nav-link {
+            border-radius: 0.25rem;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .tab-content {
+            padding: 20px;
+            border-radius: 0.25rem;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004080;
+        }
+        .footer {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
+    <!-- Navbar -->
     <nav th:replace="~{teacherDashboard :: teacher_navbar}"></nav>
 
-    <div class="container mt-4">
+    <div class="container mt-4 flex-grow-1">
         <div class="row">
             <div class="col-md-3">
                 <ul class="nav flex-column nav-pills">
@@ -27,9 +75,9 @@
                         <form>
                             <div class="form-group">
                                 <label for="assignmentFile">Choose File:</label>
-                                <input type="file" class="form-control" id="assignmentFile">
+                                <input type="file" class="form-control-file" id="assignmentFile">
                             </div>
-                            <button class="btn btn-primary">Upload</button>
+                            <button type="submit" class="btn btn-primary">Upload</button>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="view-uploads-content">
@@ -47,7 +95,7 @@
                                 <tr th:each="upload : ${uploadList}">
                                     <td th:text="${upload.studentName}">Sample Student</td>
                                     <td>
-                                        <a th:href="@{${upload.fileUrl}}" target="_blank">View Assignment</a>
+                                        <a th:href="@{${upload.fileUrl}}" target="_blank" class="btn btn-info btn-sm">View Assignment</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -58,8 +106,11 @@
         </div>
     </div>
 
-<footer th:replace="~{teacherDashboard :: teacher_footer}"></footer>
+    <footer class="footer" th:replace="~{teacherDashboard :: teacher_footer}">
+        &copy; 2024 ACTS TEACHER DASHBOARD
+    </footer>
 
+    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
