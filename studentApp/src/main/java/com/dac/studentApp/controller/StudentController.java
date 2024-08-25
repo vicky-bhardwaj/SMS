@@ -1,5 +1,7 @@
 package com.dac.studentApp.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dac.studentApp.exceptionhandler.SessionExpiredException;
 import com.dac.studentApp.model.Attendance;
@@ -105,7 +108,7 @@ public class StudentController {
 	@PostMapping("student/submitFeedback")
 	public String submitFeedback(@ModelAttribute("student")Student student, @RequestParam("teacherId") String teacherId,
 	                             @RequestParam("rating") int rating,
-	                             @RequestParam("comments") String comments, Model model)
+	                             @RequestParam("comments") String comments, RedirectAttributes redirectAttributes)
 	                              {
 	    // Create and save the feedback
 	    Feedback feedback = new Feedback();
@@ -116,8 +119,8 @@ public class StudentController {
 
 	    feedbackService.saveFeedback(feedback);
 
-	    // Add success message to the model
-        model.addAttribute("message", "Feedback has been successfully recorded.");
+	    redirectAttributes.addFlashAttribute("message", "Feedback has been successfully recorded.");
+
 
         
         return "redirect:/sd";

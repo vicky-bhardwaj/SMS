@@ -3,20 +3,16 @@ package com.dac.studentApp.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.dac.studentApp.exceptionhandler.SessionExpiredException;
 import com.dac.studentApp.model.Admin;
 import com.dac.studentApp.model.Student;
 import com.dac.studentApp.model.StudentAttendance;
@@ -24,8 +20,6 @@ import com.dac.studentApp.model.Teacher;
 import com.dac.studentApp.service.AttendanceService;
 import com.dac.studentApp.service.StudentService;
 import com.dac.studentApp.service.TeacherService;
-
-import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -71,13 +65,13 @@ public class AdminController {
 
 	 // Method to add a new student
 	    @PostMapping("/updateStudents/addNew")
-	    public String addNew(Student student) {
+	    public String addNew(Student student, RedirectAttributes redirectAttributes) {
 	    	student.setPassword(student.getlName());
 	        studentService.addNew(student);
 	        
 	        studentAttendance.setRollNo(student.getRollNo());
 	        attendanceService.addNew(studentAttendance);
-	        
+	        redirectAttributes.addFlashAttribute("message", "Added Student successfully!");
 	        return "redirect:/updateStudents";
 	    }
 	
@@ -98,18 +92,20 @@ public class AdminController {
     	} 
     // Method to update
     	@PostMapping("/updateStudents/edit")
-    	public String update(Student student) {
+    	public String update(Student student,RedirectAttributes redirectAttributes) {
     		student.setPassword(student.getlName());
     		studentService.update(student);
+    		redirectAttributes.addFlashAttribute("message", "Record Updated successfully!");
     		return "redirect:/updateStudents";
     	
     	} 
     //  Method to delete a student by rollNo
         @GetMapping("/updateStudents/delete") 
-        public String delete(@RequestParam(value = "rollNo") int rollNo) {
+        public String delete(@RequestParam(value = "rollNo") int rollNo,RedirectAttributes redirectAttributes) {
             studentService.delete(rollNo);
             studentAttendance.setRollNo(rollNo);
 	        attendanceService.delete(studentAttendance);
+	        redirectAttributes.addFlashAttribute("message", "Record Deleted successfully!");
             return "redirect:/updateStudents";
         }
 
@@ -134,9 +130,10 @@ public class AdminController {
 	
 	    // Method to add a new teacher
 	    @PostMapping("/updateTeachers/addNew")
-	    public String addNew(Teacher teacher) {
+	    public String addNew(Teacher teacher,RedirectAttributes redirectAttributes) {
 	    	teacher.setPassword(teacher.getlName());
 	        teacherService.addNew(teacher);
+	        redirectAttributes.addFlashAttribute("message", "Added Teacher successfully!");
 	        return "redirect:/updateTeachers";
 	    }
 	    //	Method to redirect to editPage teacher details
@@ -156,16 +153,18 @@ public class AdminController {
 		} 
 	// Method to update
 		@PostMapping("/updateTeachers/edit")
-		public String update(Teacher teacher) {
+		public String update(Teacher teacher,RedirectAttributes redirectAttributes) {
 			teacher.setPassword(teacher.getlName());
 			teacherService.update(teacher);
+			redirectAttributes.addFlashAttribute("message", "Record Updated successfully!");
 			return "redirect:/updateTeachers";
 		
 		} 
 	
 	    @GetMapping("/updateTeachers/delete") 
-	    public String delete(@RequestParam(value = "teacherId") String teacher) {
+	    public String delete(@RequestParam(value = "teacherId") String teacher,RedirectAttributes redirectAttributes) {
 	        teacherService.delete(teacher);
+	        redirectAttributes.addFlashAttribute("message", "Record Deleted successfully!");
 	        return "redirect:/updateTeachers";
 	    }
 

@@ -1,5 +1,7 @@
 package com.dac.studentApp.controller;
 
+
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dac.studentApp.exceptionhandler.SessionExpiredException;
 import com.dac.studentApp.model.Feedback;
@@ -100,7 +103,7 @@ public class TeacherController {
 
 			    @PostMapping("/teacher/submitAttendance")
 			    public String submitAttendance(@RequestParam("attendanceDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate attendanceDate,
-			            @RequestParam Map<String, String> requestParams, Model model) {
+			            @RequestParam Map<String, String> requestParams, RedirectAttributes redirectAttributes) {
 			    	System.out.println("1st");
 //			        String dateString = requestParams.get("attendanceDate");
 //			        LocalDate date = LocalDate.parse(dateString);
@@ -119,8 +122,8 @@ public class TeacherController {
 			        System.out.println("4th");
 			        attendanceService.saveAttendance(attendanceMap, date);
 
-			        // Add success message to the model
-			        model.addAttribute("message", "Attendance has been successfully recorded.");
+			        // Add success message to the RedirectAttribute
+			        redirectAttributes.addFlashAttribute("message", "Attendance has been successfully recorded.");
 
 			        // Redirect to a confirmation or dashboard page
 			        return "redirect:/td";

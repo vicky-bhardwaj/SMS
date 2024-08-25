@@ -1,30 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>ACTS SMS</title>
     <link rel="icon" th:href="@{/resources/book1.webp}" type="image/webp">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+        .container {
+            flex-grow: 1;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.02);
+        }
+        .card-img-top {
+            border-bottom: 1px solid #ddd;
+        }
+        .footer {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+    </style>
 </head>
 <body>
-     <nav th:replace="~{teacherDashboard :: teacher_navbar}"></nav>
+    <nav th:replace="~{teacherDashboard :: teacher_navbar}"></nav>
 
     <div class="container mt-4">
-        <h2>Upload Notes</h2>
+        <h2 class="mb-4">Upload Notes</h2>
         <div class="row">
             <!-- Subject cards for notes -->
-            <div class="col-md-4" th:each="subject : ${subjects}">
-                <div class="card mb-4">
+            <div class="col-md-4 mb-4" th:each="subject : ${subjects}">
+                <div class="card">
                     <img th:src="@{${subject.image}}" class="card-img-top" alt="Subject Image">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${subject.name}">Subject Name</h5>
                         <form>
                             <div class="form-group">
                                 <label for="notesFile">Choose File:</label>
-                                <input type="file" class="form-control" id="notesFile">
+                                <input type="file" class="form-control-file" id="notesFile">
                             </div>
-                            <button class="btn btn-primary">Upload</button>
+                            <button type="submit" class="btn btn-primary">Upload</button>
                         </form>
-                        <h6>Already Uploaded:</h6>
+                        <h6 class="mt-4">Already Uploaded:</h6>
                         <ul class="list-group">
                             <li class="list-group-item" th:each="note : ${subject.notes}">
                                 <a th:href="@{${note.url}}" target="_blank" th:text="${note.name}">Note Name</a>
@@ -36,6 +71,13 @@
         </div>
     </div>
 
-<footer th:replace="~{teacherDashboard :: teacher_footer}"></footer>
+    <footer class="footer" th:replace="~{teacherDashboard :: teacher_footer}">
+        &copy; 2024 ACTS TEACHER DASHBOARD
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
